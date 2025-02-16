@@ -10,16 +10,15 @@ const AuthPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isRegister) {
-      const users = JSON.parse(localStorage.getItem("users")) || {};
-      if (users[email]) return alert("User already exists!");
+    const users = JSON.parse(localStorage.getItem("users")) || {};
 
+    if (isRegister) {
+      if (users[email]) return alert("User already exists!");
       users[email] = { name, email, password, detailsCompleted: false };
       localStorage.setItem("users", JSON.stringify(users));
       alert("Registered successfully! Please log in.");
       setIsRegister(false);
     } else {
-      const users = JSON.parse(localStorage.getItem("users")) || {};
       if (!users[email] || users[email].password !== password) {
         return alert("Invalid credentials!");
       }
@@ -29,23 +28,22 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-4">
+    <div className="flex justify-center items-center min-h-screen bg-[#FFEBCC] px-4">
+      <div className="bg-[#FFF6E9] p-6 rounded-xl shadow-lg w-full max-w-sm sm:max-w-md">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           {isRegister ? "Register" : "Login"}
         </h2>
-
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-4">
           {isRegister && (
-            <input className="w-full p-2 mb-2 border" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
+            <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required className="w-full p-3 border rounded-lg focus:ring-2 bg-white focus:ring-blue-400" />
           )}
-          <input className="w-full p-2 mb-2 border" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input className="w-full p-2 mb-2 border" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          
-          <button className="w-full bg-blue-500 text-white p-2 rounded">{isRegister ? "Register" : "Login"}</button>
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full p-3 border rounded-lg focus:ring-2 bg-white focus:ring-blue-400" />
+          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full p-3 border rounded-lg focus:ring-2 bg-white focus:ring-blue-400" />
+          <button type="submit" className="w-full cursor-pointer bg-blue-500 text-white p-3 rounded-lg font-semibold transition hover:bg-blue-600 active:bg-blue-700" >
+            {isRegister ? "Register" : "Login"}
+          </button>
         </form>
-
-        <button className="mt-4 text-blue-500" onClick={() => setIsRegister(!isRegister)}>
+        <button className="mt-4 cursor-pointer w-full text-center text-blue-500 hover:underline" onClick={() => setIsRegister(!isRegister)} >
           {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
         </button>
       </div>

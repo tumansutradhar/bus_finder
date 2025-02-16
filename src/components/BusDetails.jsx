@@ -26,23 +26,9 @@ const BusDetails = () => {
     let updatedBuses;
 
     if (editingBusId) {
-      updatedBuses = buses.map(bus =>
-        bus.id === editingBusId
-          ? { ...bus, busNumber, fare, startLocation, startTime, endLocation, endTime }
-          : bus
-      );
+      updatedBuses = buses.map(bus => bus.id === editingBusId ? { ...bus, busNumber, fare, startLocation, startTime, endLocation, endTime } : bus );
     } else {
-      const newBus = {
-        id: Date.now(),
-        ownerId: loggedInUser.email,
-        busNumber,
-        fare,
-        startLocation,
-        startTime,
-        endLocation,
-        endTime
-      };
-      updatedBuses = [...buses, newBus];
+      const newBus = { id: Date.now(), ownerId: loggedInUser.email, busNumber, fare, startLocation, startTime, endLocation, endTime }; updatedBuses = [...buses, newBus];
     }
 
     setBuses(updatedBuses);
@@ -76,32 +62,27 @@ const BusDetails = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Manage Your Buses</h2>
-
       <div className="bg-gray-100 p-4 rounded-lg">
         <input type="text" placeholder="Bus Number" className="w-full p-2 border rounded mb-2"
           value={busNumber} onChange={(e) => setBusNumber(e.target.value)} />
         <input type="text" placeholder="Fare" className="w-full p-2 border rounded mb-2"
           value={fare} onChange={(e) => setFare(e.target.value)} />
-
         <div className="flex space-x-2">
           <input type="text" placeholder="Start Location" className="w-1/2 p-2 border rounded"
             value={startLocation} onChange={(e) => setStartLocation(e.target.value)} />
           <input type="time" className="w-1/2 p-2 border rounded"
             value={startTime} onChange={(e) => setStartTime(e.target.value)} />
         </div>
-
         <div className="flex space-x-2 mt-2">
           <input type="text" placeholder="End Location" className="w-1/2 p-2 border rounded"
             value={endLocation} onChange={(e) => setEndLocation(e.target.value)} />
           <input type="time" className="w-1/2 p-2 border rounded"
             value={endTime} onChange={(e) => setEndTime(e.target.value)} />
         </div>
-
         <button className="mt-4 bg-green-500 text-white px-6 py-2 rounded" onClick={handleSaveBus}>
           {editingBusId ? "Update Bus" : "Add Bus"}
         </button>
       </div>
-
       <h3 className="text-xl font-bold mt-6">Your Buses</h3>
       {buses.length === 0 ? (
         <p>No buses added yet.</p>

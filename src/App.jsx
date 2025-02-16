@@ -4,6 +4,7 @@ import Landing from "./components/Landing";
 import AuthPage from "./components/AuthPage";
 import UserDetails from "./components/UserDetails";
 import Dashboard from "./components/Dashboard";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
+      <Footer/>
     </Router>
   );
 }
