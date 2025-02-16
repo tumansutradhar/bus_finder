@@ -77,14 +77,11 @@ This will launch your app on http://localhost:5173/
 
 ## 👥 Contributors  
 
-<p align="center">
-  <a href="https://github.com/tumansutradhar">
-    <img src="https://github.com/tumansutradhar.png?size=100" width="70" height="70" style="border-radius: 50%;">
-  </a>
-  <a href="https://github.com/soumyadeepsarkar-2004">
-    <img src="https://github.com/soumyadeepsarkar-2004.png?size=100" width="70" height="70" style="border-radius: 50%;">
-  </a>
-</p>
+<div align="center">
+    <a href="https://github.com/tumansutradhar/bus_finder/graphs/contributors">
+        <img src="https://contrib.rocks/image?repo=tumansutradhar/bus_finder" />
+    </a>
+</div>
 
 ## ⭐ Give a Star  
 

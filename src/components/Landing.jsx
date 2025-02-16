@@ -8,6 +8,8 @@ export default function Landing() {
     const [from, setFrom] = useState(localStorage.getItem("from") || "");
     const [to, setTo] = useState(localStorage.getItem("to") || "");
     const [date, setDate] = useState(localStorage.getItem("date") || "");
+    const [filteredBuses, setFilteredBuses] = useState([]);
+    const [searchClicked, setSearchClicked] = useState(false);
 
     useEffect(() => {
         localStorage.setItem("from", from);
@@ -24,11 +26,25 @@ export default function Landing() {
 
     const handleDateChange = (e) => {
         const selectedDate = e.target.value;
-        const year = selectedDate.split("-")[0];
+        setDate(selectedDate);
+    };
 
-        if (year.length === 4) {
-            setDate(selectedDate);
+    const searchBuses = () => {
+        setSearchClicked(true);
+        const savedBuses = JSON.parse(localStorage.getItem("buses")) || [];
+
+        if (savedBuses.length === 0) {
+            setFilteredBuses([]);
+            return;
         }
+
+        const results = savedBuses.filter(bus =>
+            bus.startLocation?.toLowerCase().trim() === from.toLowerCase().trim() &&
+            bus.destination?.toLowerCase().trim() === to.toLowerCase().trim()
+        );
+
+        console.log("Filtered Buses:", results);
+        setFilteredBuses(results);
     };
 
     return (
@@ -38,13 +54,13 @@ export default function Landing() {
             <div className="w-full mb-8">
                 <Swiper modules={[Pagination, Autoplay]} pagination={{ clickable: true }} autoplay={{ delay: 3000 }} loop={true} className="rounded-lg shadow-lg">
                     <SwiperSlide>
-                        <img src="/images/bus1.jpg" alt="Bus 1" className="w-full h-96 object-cover rounded-lg" />
+                        <img src="https://images.unsplash.com/photo-1570125909517-53cb21c89ff2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bus 1" className="w-full h-96 object-cover rounded-lg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="/images/bus2.jpg" alt="Bus 2" className="w-full h-96 object-cover rounded-lg" />
+                        <img src="https://images.pexels.com/photos/1178448/pexels-photo-1178448.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bus 2" className="w-full h-96 object-cover rounded-lg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="/images/bus3.jpg" alt="Bus 3" className="w-full h-96 object-cover rounded-lg" />
+                        <img src="https://images.unsplash.com/photo-1573812456956-4a85dfc2ed00?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bus 3" className="w-full h-96 object-cover rounded-lg" />
                     </SwiperSlide>
                 </Swiper>
             </div>
@@ -60,12 +76,29 @@ export default function Landing() {
                         <input type="text" placeholder="To" className="outline-none w-full p-2 text-lg" value={to} onChange={(e) => setTo(e.target.value)} />
                     </div>
                     <div className="flex-1 flex items-center gap-2 px-4 border bg-white border-gray-300 rounded-lg w-full">
-                        <input type="date" className="outline-none w-full p-2 text-lg" value={date} onChange={handleDateChange} min="1000-01-01" max="9999-12-31" />
+                        <input type="date" className="outline-none w-full p-2 text-lg" value={date} onChange={handleDateChange} />
                     </div>
-                    <button className="bg-red-500 text-white px-6 py-3 rounded-xl font-bold cursor-pointer shadow-lg transition hover:bg-red-600 w-full sm:w-auto">
+                    <button className="bg-red-500 text-white px-6 py-3 rounded-xl font-bold cursor-pointer shadow-lg transition hover:bg-red-600 w-full sm:w-auto" onClick={searchBuses} >
                         SEARCH BUSES
                     </button>
                 </div>
+            </div>
+            <div className="w-full max-w-4xl mt-6">
+                {searchClicked && (
+                    filteredBuses.length > 0 ? (
+                        <div className="grid gap-4">
+                            {filteredBuses.map(bus => (
+                                <div key={bus.id} className="p-4 bg-white shadow-lg rounded-lg border border-gray-200">
+                                    <h3 className="text-xl font-bold">{bus.busName} ({bus.busNumber})</h3>
+                                    <p className="text-gray-700">Start: {bus.startLocation} - Departure: {bus.startDepartureTime}</p>
+                                    <p className="text-gray-700">Destination: {bus.destination} - Arrival: {bus.destinationArrivalTime}</p>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-red-600 text-center mt-4 text-lg font-semibold">No buses found. Please try a different search.</p>
+                    )
+                )}
             </div>
             <div id="about" className="w-full bg-[#FFF6E9] py-12 px-6 rounded-2xl mt-10">
                 <div className="max-w-4xl mx-auto text-center">
