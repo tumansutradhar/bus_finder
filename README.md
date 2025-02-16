@@ -41,37 +41,37 @@ The application is built using *React* and stores data locally in localStorage (
 ### *Step 2: Clone Your Fork*  
 Copy and run this command in your terminal:  
 
-sh
+```sh
 git clone https://github.com/YOUR-USERNAME/bus_finder.git
-
+```
 Navigate to the Project Directory
 
-sh
+```sh
 cd bus_finder
-
+```
 Install Dependencies
 
-sh
+```sh
 npm install
-
+```
 
 Run the following command to install Tailwind CSS v4:
 
-sh
+```sh
 npm install tailwindcss @tailwindcss/vite
-
+```
 
 To enable navigation between different pages, install React Router DOM:
 
-sh
+```sh
 npm install react-router-dom
-
+```
 
 Run the following command to start the local development server:
 
-sh
+```sh
 npm run dev
-
+```
 
 This will launch your app on http://localhost:5173/
 
@@ -79,10 +79,10 @@ This will launch your app on http://localhost:5173/
 
 <p align="center">
   <a href="https://github.com/tumansutradhar">
-    <img src="https://github.com/tumansutradhar.png?size=100" width="70" style="border-radius: 50%;">
+    <img src="https://github.com/tumansutradhar.png?size=100" width="70" height="70" style="border-radius: 50%;">
   </a>
   <a href="https://github.com/soumyadeepsarkar-2004">
-    <img src="https://github.com/soumyadeepsarkar-2004.png?size=100" width="70" style="border-radius: 50%;">
+    <img src="https://github.com/soumyadeepsarkar-2004.png?size=100" width="70" height="70" style="border-radius: 50%;">
   </a>
 </p>
 
