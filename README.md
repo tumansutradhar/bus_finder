@@ -1,11 +1,9 @@
-# [Drive Link](https://drive.google.com/file/d/1bJnxIyhSPm31CX2IhBTfyQc9YIy_Nf23/view?usp=sharing)
-
 # 🚌 Bus Tracking Platform
 
 A simple *bus tracking platform* that allows users to *register, add buses, and search for available routes*.  
 The application is built using *React* and stores data locally in localStorage (No Backend).  
 
-🚀 *Live Demo:* [Click Here](https://bus-finder-six.vercel.app/)
+🚀 *Live Demo:* [Click Here](https://bus-find.vercel.app/)
 
 ## 🌟 Features
 
